@@ -9,10 +9,6 @@ def max_pooling_2d(X: list, pool_size: int) -> list:
     h_out = h // pool_size
     w_out = w // pool_size
 
-    output = np.zeros((h_out, w_out))
-
-    for i in range(h_out):
-        for j in range(w_out):
-            output[i, j] = np.max(X[i*pool_size:(i+1)*pool_size, j*pool_size:(j+1)*pool_size])
-
+    output = X.reshape(h_out, pool_size, w_out, pool_size).max(axis=(1,3))
+    
     return output.tolist()
